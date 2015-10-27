@@ -1,12 +1,12 @@
 # Camalian
 
-TODO: Write a gem description
+Ruby gem to extract color palettes from images and play with their saturation
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'camalian'
+    gem 'camalian', '~> 0.0.2'
 
 And then execute:
 
@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    image = Camalian::load('file_path')
+    colors = image.prominent_colors(15)
+    colors = colors.sort_similar_colors
+    colors.light_colors(0, 40)
 
 ## Contributing
 
