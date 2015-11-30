@@ -25,7 +25,7 @@ module Camalian
           c.pop
           c[0], c[1], c[2] = [c[0], c[1], c[2]].map { |s|
               s = s.to_i
-              s = s / 255 if s / 255 > 0 # not all ImageMagicks are created equal....
+              s = s / 256 if s / 256 > 0 # not all ImageMagicks are created equal....
               s
           }
           colors << Color.new(c[0],c[1],c[2])
