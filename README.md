@@ -16,6 +16,11 @@ Or install it yourself as:
 
     $ gem install camalian
 
+## Prerequisites
+
+As long it works on top of RMagick, you will need ImageMagick v6.4.9 or later installed on your system.  
+Check out [RMagick prerequisites](https://github.com/rmagick/rmagick#prerequisites) for more info and notes about different systems.
+
 ## Usage
 
     image = Camalian::load('file_path')
