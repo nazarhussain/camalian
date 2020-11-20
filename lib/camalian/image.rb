@@ -1,5 +1,3 @@
-require 'rmagick'
-
 module Camalian
   class Image
     attr_accessor :src_file_path
@@ -8,29 +6,21 @@ module Camalian
       @src_file_path = file_path
     end
 
-    def prominent_colors(count=Camalian.options[:color_count])
-      image = ::Magick::Image.read(@src_file_path)[0]
-      image.resize!(100,100)
-      colors = Palette.new
-      initial_count = count
-      q = nil
-      loop do
-        q = image.quantize(initial_count, Magick::RGBColorspace)
-        break if q.color_histogram.size > count
-        initial_count = initial_count + 10
+    def prominent_colors(count=Camalian.options[:color_count], quantization: Camalian.options[:quantization], optimal: true)
+      image = ::ChunkyPNG::Image.from_file(@src_file_path)
+      colors = image.pixels.map {|val| Color.new(ChunkyPNG::Color.r(val), ChunkyPNG::Color.g(val), ChunkyPNG::Color.b(val))}
+
+      quantize = Object.const_get("Camalian::Quantization::#{quantization.capitalize}").new
+
+      palette = quantize.process(colors, count)
+
+      retry_count = 1
+      while !optimal && palette.size < count
+        palette = quantize.process(colors, count + retry_count)
+        retry_count = retry_count + 1
       end
-      palette = q.color_histogram.sort {|a, b| b[1] <=> a[1]}
-      (0..[count, palette.count].min - 1).each do |i|
-          c = palette[i].first.to_s.split(',').map {|x| x[/\d+/]}
-          c.pop
-          c[0], c[1], c[2] = [c[0], c[1], c[2]].map { |s|
-              s = s.to_i
-              s = s / 256 if s / 256 > 0 # not all ImageMagicks are created equal....
-              s
-          }
-          colors << Color.new(c[0],c[1],c[2])
-      end
-      return colors.uniq(&:to_hex)
+
+      palette
     end
   end
 end

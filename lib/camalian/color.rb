@@ -3,13 +3,13 @@ module Camalian
 
     attr_reader :r, :g, :b, :h, :s, :l, :hsv
 
-    def initialize(*value)
-      if value.size == 1
-        rgb = extract_rgb(value.first)
-        build_components(rgb[0], rgb[1], rgb[2])
-      elsif value.size == 3
-        build_components(value[0], value[1], value[2])
-      end
+    def initialize(r, g, b)
+      build_components(r, g, b)
+    end
+
+    def self.from_hex(hex_value)
+      r, g, b = extract_rgb(hex_value)
+      Color.new(r, g, b)
     end
 
     def to_s
@@ -63,7 +63,7 @@ module Camalian
       if (delta == 0)
         @s = 0
       else
-        @s = delta / ( 1 - (2*@l -1).abs )
+        @s = delta / ( 1 - (2*@l - 1).abs )
       end
 
       @h = @h.round(2)

@@ -17,6 +17,15 @@ module Camalian
       Palette.new(self.sort_by { |a| a.s }.reverse)
     end
 
+    def average_color
+      r = self.map(&:r).inject(&:+)
+      g = self.map(&:g).inject(&:+)
+      b = self.map(&:b).inject(&:+)
+      size = self.size
+
+      Color.new( r / size, g / size, b / size )
+    end
+
     def light_colors(limit1, limit2)
       min = [limit1, limit2].min
       max = [limit1, limit2].max

@@ -6,7 +6,7 @@ Ruby gem to extract color palettes from images and play with their saturation
 
 Add this line to your application's Gemfile:
 
-    gem 'camalian', '~> 0.0.3'
+    gem 'camalian', '~> 0.1.0'
 
 And then execute:
 
@@ -15,11 +15,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install camalian
-
-## Prerequisites
-
-As long it works on top of RMagick, you will need ImageMagick v6.4.9 or later installed on your system.  
-Check out [RMagick prerequisites](https://github.com/rmagick/rmagick#prerequisites) for more info and notes about different systems.
 
 ## Usage
 

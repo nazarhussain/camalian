@@ -6,23 +6,25 @@ describe Camalian::Image do
 
 end
 
+PALLET_IMAGE_COLORS = %W(#4dd915 #49cc23 #45c031 #41b43f #3da84d #399c5b #359069 #318478 #2d7886 #296c94 #2560a2 #2154b0 #1d48be #193ccc #1530db)
+
 describe Camalian::Palette do
   before do
     @image = Camalian::load( File.join( File.dirname(__FILE__), 'assets/palette.png'))
-    @palette = @image.prominent_colors(15)
+    @palette = @image.prominent_colors(15, optimal: false)
   end
 
   describe "palette with 15 colors extracted" do
     it "must have 15 colors" do
-      @palette.size.must_equal 15
+      _(@palette.size).must_equal 15
     end
 
     it "sort similar colors in order" do
-      @palette.sort_similar_colors.map(&:to_hex).must_equal %W(#4dda15 #45c131 #41b53f #3da94d #3da84e #359169 #318578 #2d7986 #296d94 #2560a3 #2154b1 #1d48bf #193dcd #193cce #1530dc)
+      _(@palette.sort_similar_colors.map(&:to_hex)).must_equal PALLET_IMAGE_COLORS
     end
 
     it "color with intensity 0-40 works well" do
-      @palette.light_colors(0, 40).map(&:to_hex).must_equal %W(#318578 #2560a3 #359169 #296d94 #2d7986)
+      _(@palette.light_colors(0, 40).map(&:to_hex)).must_equal %W(#2560a2 #296c94 #2d7886 #318478 #359069)
     end
   end
 end

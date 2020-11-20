@@ -1,21 +1,22 @@
-require "oily_png"
+require "chunky_png"
 require "tempfile"
 require "open-uri"
-require "cocaine"
 require "chunky_png_patch/color"
 
 require "camalian/version"
 require "camalian/color"
 require "camalian/palette"
 require "camalian/image"
+require "camalian/quantization/histogram"
 
 module Camalian
+  QUANTIZATION_HISTOGRAM = 'histogram'
+
   class << self
     def options
-      convert = `which convert`.strip
       @options ||= {
-          :image_magick_path  => convert.length > 0 ? convert : '/usr/bin/convert',
-          :color_count        => 8,
+        color_count: 8,
+        quantization: Camalian::QUANTIZATION_HISTOGRAM
       }
     end
 
