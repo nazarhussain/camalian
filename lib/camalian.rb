@@ -1,7 +1,6 @@
 require "chunky_png"
 require "tempfile"
 require "open-uri"
-require "chunky_png_patch/color"
 
 require "camalian/version"
 require "camalian/color"
