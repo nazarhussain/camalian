@@ -6,3 +6,4 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rubocop', '~> 1.3', require: false
+gem 'simplecov', require: false

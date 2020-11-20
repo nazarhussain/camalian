@@ -1,5 +1,10 @@
 # Camalian
 
+[![Gem Version](https://badge.fury.io/rb/camalian.svg)](https://badge.fury.io/rb/camalian) 
+[![Build Status](https://travis-ci.org/nazarhussain/camalian.svg?branch=master)](https://travis-ci.org/nazarhussain/camalian)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5495a2c122469d81b6c5/maintainability)](https://codeclimate.com/github/nazarhussain/camalian/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5495a2c122469d81b6c5/test_coverage)](https://codeclimate.com/github/nazarhussain/camalian/test_coverage)
+
 Ruby gem to extract color palettes from images and play with their saturation
 
 ## Installation
