@@ -1,6 +1,8 @@
-module Camalian
-  class Color
+# frozen_string_literal: true
 
+module Camalian
+  # Camalian color object
+  class Color
     attr_reader :r, :g, :b, :h, :s, :l, :hsv
 
     def initialize(r, g, b)
@@ -21,7 +23,7 @@ module Camalian
     end
 
     def distance(color)
-      [(self.h - color.h) % 360, (color.h - self.h) % 360].min
+      [(h - color.h) % 360, (color.h - h) % 360].min
     end
 
     def extract_rgb(color_hash)
@@ -35,7 +37,7 @@ module Camalian
 
     private
 
-    def build_components(r,g,b)
+    def build_components(r, g, b)
       @r = r
       @g = g
       @b = b
@@ -50,21 +52,21 @@ module Camalian
 
       @l = (cmax + cmin) / 2.0
 
-      if delta == 0
+      if delta.zero?
         @h = 0
       elsif cmax == ri
         @h = 60 * (((gi - bi) / delta) % 6)
       elsif cmax == gi
-        @h = 60 * (((bi - ri)/ delta) + 2)
+        @h = 60 * (((bi - ri) / delta) + 2)
       elsif cmax == bi
-        @h = 60 * (((ri - gi)/ delta) + 4)
+        @h = 60 * (((ri - gi) / delta) + 4)
       end
 
-      if (delta == 0)
-        @s = 0
-      else
-        @s = delta / ( 1 - (2*@l - 1).abs )
-      end
+      @s = if delta.zero?
+             0
+           else
+             delta / (1 - (2 * @l - 1).abs)
+           end
 
       @h = @h.round(2)
       @s = (@s * 100).round(2)
@@ -72,22 +74,22 @@ module Camalian
 
       # HSV Calculation
       # Hue calculation
-      if delta == 0
+      if delta.zero?
         @hsv = [0]
       elsif cmax == ri
         @hsv = [60 * (((gi - bi) / delta) % 6)]
       elsif cmax == gi
-        @hsv = [60 * (((bi - ri)/ delta) + 2)]
+        @hsv = [60 * (((bi - ri) / delta) + 2)]
       elsif cmax == bi
-        @hsv = [60 * (((ri - gi)/ delta) + 4)]
+        @hsv = [60 * (((ri - gi) / delta) + 4)]
       end
 
       # Saturation calculation
-      if (cmax == 0)
-        @hsv  << 0
-      else
-        @hsv << delta / cmax
-      end
+      @hsv << if cmax.zero?
+                0
+              else
+                delta / cmax
+              end
 
       # Value calculation
       @hsv << cmax

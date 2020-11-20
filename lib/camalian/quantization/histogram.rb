@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Camalian
   module Quantization
-    class Histogram
-
+    class Histogram # :nodoc:
       def process(colors, count)
         bucket_size = (255.0 / count).ceil
         buckets = {}
@@ -12,7 +13,7 @@ module Camalian
           buckets[key].push(color)
         end
 
-        Palette.new(buckets.map {|_, value| value.average_color})
+        Palette.new(buckets.map { |_, value| value.average_color })
       end
 
       private

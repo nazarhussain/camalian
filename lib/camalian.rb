@@ -1,14 +1,16 @@
-require "chunky_png"
-require "tempfile"
-require "open-uri"
+# frozen_string_literal: true
 
-require "camalian/version"
-require "camalian/color"
-require "camalian/palette"
-require "camalian/image"
-require "camalian/quantization/histogram"
+require 'chunky_png'
+require 'tempfile'
+require 'open-uri'
 
-module Camalian
+require 'camalian/version'
+require 'camalian/color'
+require 'camalian/palette'
+require 'camalian/image'
+require 'camalian/quantization/histogram'
+
+module Camalian # :nodoc:
   QUANTIZATION_HISTOGRAM = 'histogram'
 
   class << self
@@ -19,7 +21,7 @@ module Camalian
       }
     end
 
-    def load(image_path)      
+    def load(image_path)
       Image.new(image_path)
     end
   end

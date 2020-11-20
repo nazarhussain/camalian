@@ -1,35 +1,37 @@
-module Camalian
-  class Palette < Array
+# frozen_string_literal: true
 
+module Camalian
+  # Collection of colors with some useful features
+  class Palette < Array
     def sort_by_lightness
-      Palette.new(self.sort_by { |a| a.l }.reverse)
+      Palette.new(sort_by(&:l).reverse)
     end
 
     def sort_by_hue
-      Palette.new(self.sort_by { |a| a.h }.reverse)
+      Palette.new(sort_by(&:h).reverse)
     end
 
     def sort_similar_colors
-      Palette.new(self.sort_by { |a| a.hsv })
+      Palette.new(sort_by(&:hsv))
     end
 
     def sort_by_saturation
-      Palette.new(self.sort_by { |a| a.s }.reverse)
+      Palette.new(sort_by(&:s).reverse)
     end
 
     def average_color
-      r = self.map(&:r).inject(&:+)
-      g = self.map(&:g).inject(&:+)
-      b = self.map(&:b).inject(&:+)
+      r = map(&:r).inject(&:+)
+      g = map(&:g).inject(&:+)
+      b = map(&:b).inject(&:+)
       size = self.size
 
-      Color.new( r / size, g / size, b / size )
+      Color.new(r / size, g / size, b / size)
     end
 
     def light_colors(limit1, limit2)
       min = [limit1, limit2].min
       max = [limit1, limit2].max
-      table = self.dup
+      table = dup
       Palette.new(table.delete_if { |color| color.l > max or color.l < min })
     end
   end
