@@ -34,5 +34,9 @@ module Camalian
       table = dup
       Palette.new(table.delete_if { |color| color.l > max or color.l < min })
     end
+
+    def to_hex
+      map(&:to_hex)
+    end
   end
 end

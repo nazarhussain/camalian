@@ -9,9 +9,11 @@ require 'camalian/color'
 require 'camalian/palette'
 require 'camalian/image'
 require 'camalian/quantization/histogram'
+require 'camalian/quantization/k_means'
 
 module Camalian # :nodoc:
-  QUANTIZATION_HISTOGRAM = 'histogram'
+  QUANTIZATION_HISTOGRAM = Camalian::Quantization::Histogram
+  QUANTIZATION_K_MEANS = Camalian::Quantization::KMeans
 
   class << self
     def options

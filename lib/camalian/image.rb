@@ -22,7 +22,7 @@ module Camalian
         )
       end
 
-      quantize = Object.const_get("Camalian::Quantization::#{quantization.capitalize}").new
+      quantize = quantization.new
 
       palette = quantize.process(colors, count)
 

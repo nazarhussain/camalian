@@ -22,10 +22,43 @@ Or install it yourself as:
 
 ## Usage
 
-    image = Camalian::load('file_path')
-    colors = image.prominent_colors(15)
-    colors = colors.sort_similar_colors
-    colors.light_colors(0, 40)
+```ruby
+image = Camalian::load('file_path')
+colors = image.prominent_colors(15)
+colors = colors.sort_similar_colors
+colors.light_colors(0, 40)
+```
+    
+### Quantization Algorithms
+Currently following algorithms are implemented. 
+
+**Histogram**
+
+Its a most common algorithm for color quantization and used different bucket technique to group the colors together. You can read more about this technique here https://en.wikipedia.org/wiki/Color_histogram. It can be accessed by `Camalian::QUANTIZATION_HISTOGRAM` constant. This is used as default method as well.   
+
+
+**K Means**
+
+This algorithm uses color distancing in RGB space to group the similar colors. You can learn more about this technique here https://en.wikipedia.org/wiki/K-means_clustering. It can be accessed by `Camalian::QUANTIZATION_K_MEANS` constant.  
+
+
+You can set default quantization method globally as: 
+
+```ruby
+Camalian.options[:quantization] = Camalian::QUANTIZATION_K_MEANS
+```
+
+or you can set at the time of extracting colors by.
+
+```ruby
+image = Camalian::load('file_path')
+colors = image.prominent_colors(15, quantization: Camalian::QUANTIZATION_K_MEANS)
+```
+
+## Usage
+You can find a working example with detail explanation and reference code here on [this link](https://basicdrift.com/color-extraction-library-build-color-search-engine-fdf369678d5a). Here we will build a functional color based image search engine in Ruby on Rails.
+
+NOTE: Since its a compute intensive operation so for production use its suggested to use under a background job and not within a request/response cycle. 
 
 ## Contributing
 

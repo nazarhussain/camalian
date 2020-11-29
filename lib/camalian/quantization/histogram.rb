@@ -13,7 +13,7 @@ module Camalian
           buckets[key].push(color)
         end
 
-        Palette.new(buckets.map { |_, value| value.average_color })
+        Palette.new(buckets.map { |_, value| value.average_color }[0...count])
       end
 
       private

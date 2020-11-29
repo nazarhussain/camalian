@@ -10,7 +10,12 @@ module Camalian
     end
 
     def self.from_hex(hex_value)
-      r, g, b = extract_rgb(hex_value)
+      color_hash = hex_value[0..6]
+      color_hash = color_hash[1..6] if color_hash[0] == '#'
+      r = color_hash[0..1].to_i(16)
+      g = color_hash[2..3].to_i(16)
+      b = color_hash[4..5].to_i(16)
+
       Color.new(r, g, b)
     end
 
@@ -22,17 +27,23 @@ module Camalian
       "##{r.to_s(16).rjust(2, '0')}#{g.to_s(16).rjust(2, '0')}#{b.to_s(16).rjust(2, '0')}"
     end
 
-    def distance(color)
+    # Used for array uniqueness
+    def hash
+      "#{r}#{g}#{b}".to_i
+    end
+
+    # Used for object comparison
+    def ==(other)
+      r == other.r && g == other.g && b == other.b
+    end
+    alias eql? ==
+
+    def hue_distance(color)
       [(h - color.h) % 360, (color.h - h) % 360].min
     end
 
-    def extract_rgb(color_hash)
-      color_hash = color_hash[0..6]
-      color_hash = color_hash[1..6] if color_hash[0] == '#'
-      r = color_hash[0..1].to_i(16)
-      g = color_hash[2..3].to_i(16)
-      b = color_hash[4..5].to_i(16)
-      [r, g, b]
+    def rgb_distance(color)
+      Math.sqrt(((r - color.r)**2) + ((g - color.g)**2) + ((b - color.b)**2))
     end
 
     private

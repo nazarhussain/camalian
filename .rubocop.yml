@@ -27,6 +27,10 @@ Metrics/PerceivedComplexity:
 Metrics/CyclomaticComplexity:
   Max: 15
 
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*
+
 Metrics/AbcSize:
   Max: 20
   IgnoredMethods:
