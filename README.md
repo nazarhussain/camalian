@@ -10,7 +10,7 @@ Ruby gem to extract color palettes from images and play with their saturation
 
 Add this line to your application's Gemfile:
 
-    gem 'camalian', '~> 0.1.0'
+    gem 'camalian', '~> 0.1.1'
 
 And then execute:
 
