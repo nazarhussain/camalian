@@ -32,6 +32,6 @@ Metrics/BlockLength:
     - test/**/*
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 30
   IgnoredMethods:
     - build_components

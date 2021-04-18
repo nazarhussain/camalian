@@ -10,10 +10,12 @@ require 'camalian/palette'
 require 'camalian/image'
 require 'camalian/quantization/histogram'
 require 'camalian/quantization/k_means'
+require 'camalian/quantization/median_cut'
 
 module Camalian # :nodoc:
   QUANTIZATION_HISTOGRAM = Camalian::Quantization::Histogram
   QUANTIZATION_K_MEANS = Camalian::Quantization::KMeans
+  QUANTIZATION_MEDIAN_CUT = Camalian::Quantization::MedianCut
 
   class << self
     def options

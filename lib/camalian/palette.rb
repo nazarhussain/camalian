@@ -3,6 +3,10 @@
 module Camalian
   # Collection of colors with some useful features
   class Palette < Array
+    def self.from_hex(hex_values)
+      new(hex_values.map { |v| Color.from_hex(v) })
+    end
+
     def sort_by_lightness
       Palette.new(sort_by(&:l).reverse)
     end
