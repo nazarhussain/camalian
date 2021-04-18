@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest', '~> 5.14', '>= 5.14.2'
   spec.add_development_dependency 'rake', '~> 13.0', '>= 13.0.1'
 
-  spec.required_ruby_version = '>= 2.4'
+  spec.required_ruby_version = '>= 2.5'
 end
