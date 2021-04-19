@@ -13,7 +13,10 @@ module Camalian
           buckets[key].push(color)
         end
 
-        Palette.new(buckets.map { |_, value| value.average_color }[0...count])
+        buckets = buckets.values
+        buckets = buckets.sort_by(&:size).reverse
+        average_colors = buckets.map(&:average_color)
+        Palette.new(average_colors[0...count])
       end
 
       private
